@@ -75,17 +75,17 @@ class SLL(object):
         else:
             return None
 
-    def insert(self, index, key):
-        new_node = Node(key)
-        nd = self.head
-        counter = 0
-        while nd:
-            if counter == index:
-                # new_node.pointer = nd
-                # nd.pointer = new_node
-                break
-            else: nd = nd.pointer
-            counter += 1
+    # def insert(self, index, key):
+    #     new_node = Node(key)
+    #     nd = self.head
+    #     counter = 0
+    #     while nd:
+    #         if counter == index:
+    #             new_node.pointer = nd
+    #             nd.pointer = new_node
+    #             break
+    #         else: nd = nd.pointer
+    #         counter += 1
 
 
     def __len__(self):
