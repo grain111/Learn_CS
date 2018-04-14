@@ -59,7 +59,8 @@ class SLL(object):
         counter = 0
         nd = self.head
         while nd:
-            if counter == index: return nd.val
+            if counter == index:
+                return nd.val
             counter += 1
             nd = nd.pointer
 
@@ -75,18 +76,36 @@ class SLL(object):
         else:
             return None
 
-    # def insert(self, index, key):
-    #     new_node = Node(key)
-    #     nd = self.head
-    #     counter = 0
-    #     while nd:
-    #         if counter == index:
-    #             new_node.pointer = nd
-    #             nd.pointer = new_node
-    #             break
-    #         else: nd = nd.pointer
-    #         counter += 1
+    def insert(self, index, key):
+        if index == 0:
+            self.push_front(key)
+        else:
+            new_node = Node(key)
+            nd = self.head
+            counter = 0
+            while nd:
+                if counter == index - 1:
+                    new_node.pointer = nd.pointer
+                    nd.pointer = new_node
+                    break
+                else: nd = nd.pointer
+                counter += 1
 
+    def erase(self, index):
+        if index == 0:
+            self.pop_front()
+        else:
+            nd = self.head
+            counter = 0
+            while nd:
+                if counter == index - 1:
+                    nd.pointer = nd.pointer.pointer
+                    break
+                else: nd = nd.pointer
+                counter += 1
+
+    def nth_val_from_end(self, index):
+        return self.get(len(self) - index - 1)
 
     def __len__(self):
         count = 0
