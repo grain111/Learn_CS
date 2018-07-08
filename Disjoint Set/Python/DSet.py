@@ -14,8 +14,12 @@ class DSet(object):
             if n.data == val:
                 node = n
         try:
+            stack = []
             while node.parent != node:
+                stack.append(node)
                 node = node.parent
+            for n in stack:
+                n.parent = node
             return node
         except UnboundLocalError:
             print("There is no such element in sets!")
