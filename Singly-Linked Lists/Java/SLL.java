@@ -12,16 +12,25 @@ Node head = null;
 
   }
 
-   void print(){
+  void pushBack(float val){
+    Node newNode = new Node(val);
     Node node = head;
-    while (true){
-      System.out.println(node.val);
+    while (node.pointer != null){
       node = node.pointer;
-      if (node == null){
-        break;
-      }
     }
+    node.pointer = newNode;
+  }
 
+   String print(){
+    String out = "";
+    Node node = head;
+    while (node != null){
+      out += node.val;
+      out += " ";
+      node = node.pointer;
+    }
+    System.out.println(out);
+    return out;
   }
 
   public static void main(String []args) {
