@@ -17,8 +17,8 @@ class test_BST(unittest.TestCase):
         for i in range(50):
             bin.insert(i)
 
-        self.assertEqual(bin.find(8), 8)
-        self.assertEqual(bin.find(49), 49)
+        self.assertEqual(bin.find(8).val, 8)
+        self.assertEqual(bin.find(49).val, 49)
         self.assertEqual(bin.find(60), None)
 
     def test_next(self):
@@ -70,7 +70,73 @@ class test_BST(unittest.TestCase):
 
         self.assertEqual(bin.sorted(), [1,2,3,4,5,6,7,8,9,10,11,12,20])
 
+    def test_delete_w_no_children(self):
+        bin = BST()
+        bin.insert(7)
+        bin.insert(3)
+        bin.insert(8)
+        bin.insert(1)
+        bin.insert(5)
+        bin.insert(2)
+        bin.insert(4)
+        bin.insert(6)
+        bin.insert(10)
+        bin.insert(9)
+        bin.insert(20)
+
+        bin.delete(bin.root.right.right.right)
+
+        self.assertEqual([x.val for x in bin.get_level(3)], [2,4,6,9])
+
+    def test_delete_w_one_child(self):
+        bin = BST()
+        bin.insert(5)
+        bin.insert(2)
+        bin.insert(18)
+        bin.insert(-4)
+        bin.insert(3)
+        bin.insert(21)
+        bin.insert(19)
+        bin.insert(25)
+
+        bin.delete(bin.root.right)
+
+        self.assertEqual([x.val for x in bin.get_level(1)], [2,21])
+
+    def test_delete_w_two_children(self):
+        bin = BST()
+        bin.insert(5)
+        bin.insert(2)
+        bin.insert(12)
+        bin.insert(-4)
+        bin.insert(3)
+        bin.insert(9)
+        bin.insert(21)
+        bin.insert(19)
+        bin.insert(25)
+
+        # print(bin)
+
+        bin.delete(bin.root.right)
+
+        self.assertEqual([x.val for x in bin.get_level(1)], [2, 19])
+        self.assertEqual([x.val for x in bin.get_level(3)], [25])
+
 
 
 if __name__ == "__main__":
+    # bin = BST()
+    # bin.insert(7)
+    # bin.insert(3)
+    # bin.insert(8)
+    # bin.insert(1)
+    # bin.insert(5)
+    # bin.insert(2)
+    # bin.insert(4)
+    # bin.insert(6)
+    # bin.insert(10)
+    # bin.insert(9)
+    # bin.insert(20)
+    #
+    # print(bin)
     unittest.main()
