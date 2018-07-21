@@ -41,6 +41,7 @@ class BST(object):
                 else:
                     nd = nd.left
 
+        # Updating height of the nodes
         if (nd.right == None) ^ (nd.left == None):
             while nd != None:
                 left_child_height = 0 if nd.left == None else nd.left.height

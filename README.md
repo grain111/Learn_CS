@@ -11,7 +11,7 @@ You can find the video [here](https://youtu.be/-OvRVlqKebI).
 - https://automatetheboringstuff.com/
 - https://www.codecademy.com/learn/learn-python
 
-## Week 3-4 (Data Structures)
+## <del>Week 3-4 (Data Structures)</del>
 - https://www.edx.org/course/data-structures-fundamentals-uc-san-diegox-algs201x  
 
 ## Week 5-6 (Algorithms)
