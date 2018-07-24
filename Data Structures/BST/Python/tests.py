@@ -114,9 +114,7 @@ class test_BST(unittest.TestCase):
         bin.insert(21)
         bin.insert(19)
         bin.insert(25)
-
-        # print(bin)
-
+        
         bin.delete(bin.root.right)
 
         self.assertEqual([x.val for x in bin.get_level(1)], [2, 19])
@@ -136,7 +134,10 @@ if __name__ == "__main__":
     # bin.insert(6)
     # bin.insert(10)
     # bin.insert(9)
-    # bin.insert(20)
+    # bin.insert(21)
+    # bin.insert(-10)
+    # bin.insert(-15)
+    # bin.insert(-120)
     #
     # print(bin)
     unittest.main()

@@ -1,3 +1,4 @@
+from  collections import namedtuple
 class BST(object):
 
     def __init__(self):
@@ -5,18 +6,30 @@ class BST(object):
 
     def __str__(self):
         height = self.root.height
-        width = ((2 ** height) + 1) * 8 + 2 ** height * 2
-        lvl = [self.root]
-        for level in range(height + 1):
-            lst = [str(x.val).ljust(2) if x else " " for x in lvl]
-            space_between = width // ((2 ** level) + 1)
-            # print(lst)
-            print(" " * space_between + (" " * space_between).join(lst) + " " * space_between)
-            temp = [None] * (2 ** (level + 1))
-            for i, l in enumerate(lvl):
-                temp[2 * i] = l.left if l else None
-                temp[2 * i + 1] = l.right if l else None
-            lvl = [n for n in temp]
+        char_width = 3
+        parameters = [None] * (height + 1)
+        spacing = 1
+        width = (2 ** height) * char_width + (2 ** height - 1) * spacing
+        RowParam = namedtuple("row_parameters", ['padding', 'spacing'])
+
+        for i in range(len(parameters) - 1, -1, -1):
+            padding = 0 if i == height else (parameters[i + 1].spacing - char_width) // 2 + char_width + parameters[i + 1].padding
+            space_between = (width - padding * 2 - 2 ** i * char_width)
+            spacing = space_between if i == 0 else space_between // (2 ** i - 1)
+            parameters[i] = RowParam(padding, spacing)
+
+        for lvl in range(height + 1):
+            if lvl == 0: nodes = [self.root]
+            else:
+                temp =  [None] * (2 ** lvl)
+                for i, n in enumerate(nodes):
+                    temp[2 * i] = n.left if n else None
+                    temp[2 * i + 1] = n.right if n else None
+                nodes = [node for node in temp]
+
+            node_vals = [str(x.val).zfill(char_width) if x else (" " * char_width) for x in nodes]
+            pad = parameters[lvl].padding
+            print(" " * pad + (" " * parameters[lvl].spacing).join(node_vals) + " " * pad)
 
         return "{}".format(width)
 
