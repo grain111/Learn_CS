@@ -1,9 +1,9 @@
-def m_sorter(arr):
+def m_sort(arr):
     if len(arr) == 0: return None
     if len(arr) == 1: return arr
 
     mid = len(arr) // 2
-    return merge(m_sorter(arr[:mid]), m_sorter(arr[mid:]))
+    return merge(m_sort(arr[:mid]), m_sort(arr[mid:]))
 
 def merge(a, b):
     # print("Merging {} and {}".format(a, b))

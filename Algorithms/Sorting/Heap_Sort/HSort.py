@@ -1,4 +1,5 @@
 from math import log, floor
+import time
 
 def h_sort(arr):
     if not arr: return None
@@ -9,14 +10,21 @@ def h_sort(arr):
     # Heapify the array
     start_ind = 2 ** (heap_height - 1) - 2
     # print(start_ind)
+    start = time.time()
     for ind in range(start_ind, -1, -1):
         # print("Heapifying at index {}, value {}".format(ind, arr[ind]))
         arr = heapify(arr, ind, n)
+
+    end = time.time()
+    print("Setup time {}".format(end-start))
     # Sorting
+    start = time.time()
     for i in range(n):
         arr = swap(arr, 0, n - 1)
         n -= 1
         arr = heapify(arr, 0, n)
+    end = time.time()
+    print("Sorting time {}".format(end-start))
 
     return arr
 
@@ -49,6 +57,7 @@ def get_child(arr, index, n, val):
     return ind if ind < n else None
 
 def swap(arr, i, j):
+    # print("Swapping {} with {}".format(i, j))
     temp = arr[i]
     arr[i] = arr[j]
     arr[j] = temp

@@ -1,4 +1,4 @@
-def insertion(arr):
+def i_sort(arr):
     if not arr: return None
 
     for key, key_val in enumerate(arr):
