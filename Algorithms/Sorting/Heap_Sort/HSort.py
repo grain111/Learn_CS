@@ -16,7 +16,7 @@ def h_sort(arr):
         arr = heapify(arr, ind, n)
 
     end = time.time()
-    print("Setup time {}".format(end-start))
+    # print("Setup time {}".format(end-start))
     # Sorting
     start = time.time()
     for i in range(n):
@@ -24,7 +24,7 @@ def h_sort(arr):
         n -= 1
         arr = heapify(arr, 0, n)
     end = time.time()
-    print("Sorting time {}".format(end-start))
+    # print("Sorting time {}".format(end-start))
 
     return arr
 
@@ -39,14 +39,27 @@ def heapify(arr, index, n):
 
 def heapify_node(arr, index, n):
 
-    children = []
-    if get_child(arr, index, n, 1): children.append(get_child(arr, index, n, 1))
-    if get_child(arr, index, n, 2): children.append(get_child(arr, index, n, 2))
-    # print("Children at index {} are {}".format(index, children))
-    if len(children) == 0: return arr, False, None
-    max_child = max(children, key = lambda x: arr[x])
-    if arr[max_child] > arr[index]: arr = swap(arr, index, max_child)
-    return arr, True, max_child
+    # children = []
+    # if get_child(arr, index, n, 1): children.append(get_child(arr, index, n, 1))
+    # if get_child(arr, index, n, 2): children.append(get_child(arr, index, n, 2))
+    # # print("Children at index {} are {}".format(index, children))
+    # if len(children) == 0: return arr, False, None
+    # max_child = max(children, key = lambda x: arr[x])
+    # if arr[max_child] > arr[index]: arr = swap(arr, index, max_child)
+    # return arr, True, max_child
+
+    largest = index
+    if (get_child(arr, index, n, 1) != None and arr[get_child(arr, index, n, 1)] > arr[largest]):
+        largest = get_child(arr, index, n, 1)
+    if (get_child(arr, index, n, 2) != None and arr[get_child(arr, index, n, 2)] > arr[largest]):
+        largest = get_child(arr, index, n, 2)
+
+    if largest == index:
+        return arr, False, None
+    else:
+        swap(arr, index, largest)
+
+    return arr, True, largest
 
 def get_parent(index):
     return (index - 1) // 2 if (index - 1) // 2 >= 0 else None
