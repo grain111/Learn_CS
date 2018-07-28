@@ -6,9 +6,9 @@ class BST(object):
 
     def __str__(self):
         height = self.root.height
-        char_width = 3
+        char_width = 2
         parameters = [None] * (height + 1)
-        spacing = 1
+        spacing = 4
         width = (2 ** height) * char_width + (2 ** height - 1) * spacing
         RowParam = namedtuple("row_parameters", ['padding', 'spacing'])
 
@@ -31,7 +31,7 @@ class BST(object):
             pad = parameters[lvl].padding
             print(" " * pad + (" " * parameters[lvl].spacing).join(node_vals) + " " * pad)
 
-        return "{}".format(width)
+        return ""
 
     def insert(self, value):
         if self.root == None:
@@ -53,15 +53,16 @@ class BST(object):
                     break
                 else:
                     nd = nd.left
+        self.update_heights(nd)
 
-        # Updating height of the nodes
-        if (nd.right == None) ^ (nd.left == None):
-            while nd != None:
-                left_child_height = 0 if nd.left == None else nd.left.height
-                right_child_height = 0 if nd.right == None else nd.right.height
-                max_child_height = max(left_child_height, right_child_height)
-                nd.height = max_child_height + 1
-                nd = nd.parent
+    def update_heights(self, nd):
+
+        while nd != None:
+            left_child_height = -1 if nd.left == None else nd.left.height
+            right_child_height = -1 if nd.right == None else nd.right.height
+            max_child_height = max(left_child_height, right_child_height)
+            nd.height = max_child_height + 1
+            nd = nd.parent
 
     def find(self, key, root=0):
         root = root if root is not 0 else self.root
@@ -118,6 +119,8 @@ class BST(object):
             else:
                 parent.right = None
 
+            self.update_heights(parent)
+
         elif (node.left == None) ^ (node.right == None):
             parent = node.parent
             child = node.left if node.left else node.right
@@ -125,6 +128,8 @@ class BST(object):
                 parent.left = child
             else:
                 parent.right = child
+
+            self.update_heights(child)
 
         else:
             minimum = node.right
