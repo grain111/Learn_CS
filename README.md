@@ -17,7 +17,7 @@ You can find the video [here](https://youtu.be/-OvRVlqKebI).
 ## <del>Week 5-6 (Algorithms)</del>
 - https://courses.csail.mit.edu/6.006/fall11/notes.shtml
 
-## Week 7 (Databases)
+## <del>Week 7 (Databases)</del>
 - https://www.coursera.org/learn/python-databases
 
 ## Week 8 (Networking)
