@@ -7,3 +7,11 @@ __pycache__/
 
 # SQL Lite
 *.db-journal
+*.sqlite
+
+# Other
+*.data
+*.json
+
+# Secret
+secret.json
