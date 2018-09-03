@@ -20,7 +20,7 @@ You can find the video [here](https://youtu.be/-OvRVlqKebI).
 ## <del>Week 7 (Databases)</del>
 - https://www.coursera.org/learn/python-databases
 
-## Week 8 (Networking)
+## <del>Week 8 (Networking)</del>
 -  https://www.coursera.org/learn/computer-networking
 
 ## Week 9-10 (Web Development)
