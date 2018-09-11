@@ -15,3 +15,6 @@ __pycache__/
 
 # Secret
 secret.json
+
+#SASS
+*.css.map

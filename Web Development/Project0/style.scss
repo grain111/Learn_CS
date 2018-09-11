@@ -1,0 +1,48 @@
+$main_color: LightGray;
+$second_color: Gray;
+$highlight: Pink;
+$text_color: DodgerBlue;
+$text_highlight: SlateBlue;
+
+/* Basic styling */
+body {
+  font: sans-serif;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 2%;
+  background-color: $main_color;
+}
+
+/* Nav bar style */
+nav {
+  text-align: center;
+  color: $text_color;
+  font-size: 32px;
+
+  a:link, a:visited {
+    color: $text_color;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .nav_item:hover {
+    background-color: $second_color;
+  }
+
+  .nav_item_header:hover {
+    background-color: $highlight;
+  }
+
+  a:hover {
+    color: $text_highlight;
+  }
+}
+
+/* Gallery styling */
+img {
+  width: 100%;
+}
+
+.desc {
+  background-color: $second_color;
+}
