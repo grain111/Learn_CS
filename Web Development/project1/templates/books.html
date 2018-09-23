@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block body %}
+<h1>{{ r[1] }}</h1>
+<ul>
+  <li>Book by {{ r[0] }}</li>
+  <li>Published in {{ r[3] }}</li>
+  <li>ISBN: {{ r[2] }}</li>
+{% endblock body %}

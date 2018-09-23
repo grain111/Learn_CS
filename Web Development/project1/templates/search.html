@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block body %}
+<h1>Search Results</h1>
+<ul>
+{% for r in result %}
+  <li><a href="{{ url_for('books', id=r[1])}}">{{ r[0] }}</a></li>
+{% endfor %}
+{% endblock body %}
