@@ -91,4 +91,8 @@ def books(id):
                            FROM Books Join Authors ON Books.author_id=Authors.id
                            WHERE Books.id=:id""",
                         {"id": id}).fetchone()
-    return render_template("books.html", r=result)
+    reviews = db.execute("""SELECT review, rating FROM Reviews
+                            WHERE book_id=:book_id""",
+                         {"book_id": id}).fetchall()
+    print(reviews)
+    return render_template("books.html", r=result, reviews=reviews)

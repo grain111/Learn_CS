@@ -8,4 +8,18 @@
   <li>Book by {{ r[0] }}</li>
   <li>Published in {{ r[3] }}</li>
   <li>ISBN: {{ r[2] }}</li>
+</ul>
+
+<h1>Reviews</h1>
+<ol>
+  {% for review in reviews %}
+    <li>
+      <ul>
+        <li>Rating: {{ review[1] }}</li>
+        <li>{{ review[0] }}</li>
+      </ul>
+    </li>
+  {% endfor %}
+</ol>
+
 {% endblock body %}
