@@ -1,7 +1,7 @@
 import os
 from hashlib import sha1 as hash
 
-from flask import Flask, session, render_template, request, url_for
+from flask import Flask, session, render_template, request, url_for, redirect
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -87,12 +87,31 @@ def search():
 
 @app.route('/books/<id>')
 def books(id):
-    result = db.execute("""SELECT Authors.name, Books.title, Books.isbn, Books.year
+    result = db.execute("""SELECT Authors.name, Books.title, Books.isbn, Books.year, Books.id
                            FROM Books Join Authors ON Books.author_id=Authors.id
                            WHERE Books.id=:id""",
                         {"id": id}).fetchone()
-    reviews = db.execute("""SELECT review, rating FROM Reviews
+    reviews = db.execute("""SELECT Reviews.review, Reviews.rating, Users.name
+                            FROM Reviews JOIN Users
+                            ON Reviews.user_id=Users.id
                             WHERE book_id=:book_id""",
                          {"book_id": id}).fetchall()
-    print(reviews)
-    return render_template("books.html", r=result, reviews=reviews)
+    reviewed = True if db.execute("""SELECT * FROM Reviews
+                                      WHERE user_id=:user_id AND book_id=:book_id""",
+                                   {"user_id": session["user_data"]["id"],
+                                    "book_id": id}).fetchone() else False
+    return render_template("books.html",
+                           r=result,
+                           reviews=reviews,
+                           reviewed=reviewed)
+
+@app.route('/submit_review', methods=["POST"])
+def submit_review():
+    db.execute("""INSERT INTO Reviews (book_id, user_id, review, rating)
+                  VALUES (:book_id, :user_id, :review, :rating)""",
+               {"book_id": request.form["book"],
+                "user_id": session["user_data"]["id"],
+                "review": request.form["rev"],
+                "rating": request.form["rating"]})
+    db.commit()
+    return redirect(url_for('books', id=request.form["book"]))
