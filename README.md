@@ -45,3 +45,13 @@ You can find the video [here](https://youtu.be/-OvRVlqKebI).
 
 ## Week 20 (Blockchain)
 - https://www.youtube.com/watch?v=cjbHqvr4ffo&list=PL2-dafEMk2A7jW7CYUJsBu58JH27bqaNL
+
+## (Arduino)
+- https://www.udemy.com/arduino-sbs-17gs/
+- https://www.udemy.com/arduino-programming-and-hardware-fundamentals-with-hackster/
+
+## (Linux ,C , Assembly & other low level stuff)
+- Operating Systems: Design and Implementation (Second Edition)
+- Understanding the Linux Kernel, Third Edition
+- The Design of the UNIX Operating System
+- MITxComputation Structures
