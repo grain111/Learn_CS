@@ -12,9 +12,13 @@ __pycache__/
 # Other
 *.data
 *.json
+*.csv
 
 # Secret
 secret.json
 
 #SASS
 *.css.map
+
+# Flask
+flask_session/

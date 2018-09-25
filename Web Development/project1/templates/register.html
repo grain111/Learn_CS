@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}Login Page{% endblock title %}
+
+{% block body %}
+<h1>Register</h1>
+<form method="post">
+  <label for="username">Login</label>
+  <input name="username" id="username" required>
+
+  <label for="password">Password</label>
+  <input name="password" type="password" id="password" required>
+
+  <br>
+  <label for="name">Name</label>
+  <input name="name" type="text" id="name" required><br>
+
+  <label for="email">e-mail</label>
+  <input name="email" type="email" id="email" required><br>
+
+  <label for="gender">Gender</label>
+  <input name="gender" type="radio" id="gender1" value="male" checked>Male
+  <input name="gender" type="radio" id="gender2" value="female">Frmale<br>
+
+  <label for="age">Age</label>
+  <input name="age" type="number" id="age" required><br>
+
+  <input type="submit" value="Register">
+</form>
+{% endblock body %}

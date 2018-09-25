@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}Search Results{% endblock title %}
+
+{% block body %}
+<h1>{{ r[1] }}</h1>
+<ul>
+  <li>Book by {{ r[0] }}</li>
+  <li>Published in {{ r[3] }}</li>
+  <li>ISBN: {{ r[2] }}</li>
+</ul>
+
+<h1>Goodreads Data</h1>
+<ul>
+  <li>Number of ratings: {{ goodreads["ratings_count"] }}</li>
+  <li>Average rating: {{ goodreads["average_rating"] }}
+</ul>
+
+<h1>Reviews</h1>
+<ol>
+  {% for review in reviews %}
+    <li>
+      <ul>
+        <li>Review by: {{ review[2] }}
+        <li>Rating: {{ review[1] }}</li>
+        <li>{{ review[0] }}</li>
+      </ul>
+    </li>
+  {% endfor %}
+</ol>
+{% if not reviewed %}
+  <form method="post" action="{{ url_for('submit_review') }}">
+    <input name="rev" type="text" id="rev">
+    <select name="rating">
+      {% for i in range(5) %}
+        <option value="{{ i + 1 }}">{{ i + 1 }}</option>
+      {% endfor %}
+    </select>
+    <input name="book" type="number" id="book" value="{{ r[4] }}" hidden>
+    <input type="submit">
+  </form>
+{% endif %}
+
+{% endblock body %}
