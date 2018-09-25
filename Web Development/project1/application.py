@@ -1,7 +1,7 @@
 import os
 from hashlib import sha1 as hash
 
-from flask import Flask, session, render_template, request, url_for, redirect
+from flask import Flask, session, render_template, request, url_for, redirect, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -119,3 +119,22 @@ def submit_review():
                 "rating": request.form["rating"]})
     db.commit()
     return redirect(url_for('books', id=request.form["book"]))
+
+@app.route('/api/<isbn>')
+def api(isbn):
+    book = db.execute("""SELECT Books.title, Authors.name, Books.year,
+                                Books.isbn, COUNT(Reviews.review),
+                                AVG(Reviews.rating)
+                         FROM Books
+                            JOIN Authors ON Books.author_id=Authors.id
+                            JOIN Reviews ON Reviews.book_id=Books.id
+                         GROUP BY Books.title, Authors.name,
+                                  Books.year, Books.isbn
+                         HAVING Books.isbn=:isbn""", {"isbn": isbn}).fetchone()
+    book = {"title": book[0],
+            "author": book[1],
+            "year": book[2],
+            "isbn": book[3],
+            "review_count": book[4],
+            "average_score": float(book[5])}
+    return jsonify(book)
