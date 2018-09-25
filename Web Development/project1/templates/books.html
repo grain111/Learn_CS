@@ -10,6 +10,12 @@
   <li>ISBN: {{ r[2] }}</li>
 </ul>
 
+<h1>Goodreads Data</h1>
+<ul>
+  <li>Number of ratings: {{ goodreads["ratings_count"] }}</li>
+  <li>Average rating: {{ goodreads["average_rating"] }}
+</ul>
+
 <h1>Reviews</h1>
 <ol>
   {% for review in reviews %}

@@ -6,6 +6,8 @@ from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+from goodreadsapi import get_book_data
+
 app = Flask(__name__)
 
 # Check for environment variable
@@ -100,10 +102,12 @@ def books(id):
                                       WHERE user_id=:user_id AND book_id=:book_id""",
                                    {"user_id": session["user_data"]["id"],
                                     "book_id": id}).fetchone() else False
+    goodreads = get_book_data(result[2])
     return render_template("books.html",
                            r=result,
                            reviews=reviews,
-                           reviewed=reviewed)
+                           reviewed=reviewed,
+                           goodreads=goodreads)
 
 @app.route('/submit_review', methods=["POST"])
 def submit_review():
