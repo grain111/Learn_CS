@@ -17,8 +17,11 @@ __pycache__/
 # Secret
 secret.json
 
-#SASS
+# SASS
 *.css.map
 
 # Flask
 flask_session/
+
+# CS50
+examples/

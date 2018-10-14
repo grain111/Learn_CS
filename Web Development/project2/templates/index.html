@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  My app
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
+
+{% block main %}
+  {% if not session["user_name"] %}
+    <script src="{{ url_for('static', filename='index.js') }}"></script>
+    <p>You have to enter screen name to use this app!</p>
+    <form id="user_creation" method="post">
+      <input type="text" id="user_name">
+    </form>
+    <button id="add_user">Connect!</button>
+  {% else %}
+    <p>Hello {{ session["user_name"] }}</p>
+  {% endif %}
+{% endblock %}
