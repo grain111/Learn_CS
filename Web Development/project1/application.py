@@ -33,14 +33,15 @@ def register():
     if request.method == "GET":
         return render_template('register.html')
 
-    check = db.execute("""SELECT id FROM Users WHERE login=:username""", request.form)
+    check = db.execute(
+        """SELECT id FROM Users WHERE login=:username""", request.form)
     if check.fetchone():
         return render_template('register.html', error_message="User name already taken")
 
     data = {
         "pass": hash(request.form['password'].encode()).hexdigest(),
         "login": request.form['username']
-        }
+    }
     db.execute("""INSERT INTO Users (login, name, email, age, gender)
                   VALUES (:username, :name, :email, :age, :gender)""", request.form)
     db.execute("""UPDATE Users SET password=:pass WHERE login=:login""", data)
@@ -52,7 +53,8 @@ def login():
     if request.method == "GET":
         return render_template('login.html')
 
-    password, id, name = db.execute("""SELECT password, id, name FROM Users WHERE login=:username""", request.form).fetchone()
+    password, id, name = db.execute(
+        """SELECT password, id, name FROM Users WHERE login=:username""", request.form).fetchone()
     if password == hash(request.form['password'].encode()).hexdigest():
         session['user_data'] = {
             "id": id,
@@ -75,7 +77,7 @@ def search():
         "title": "%{}%".format(request.args.get("title")),
         "author": "%{}%".format(request.args.get("author")),
         "isbn": "%{}%".format(request.args.get("isbn"))
-        }
+    }
 
     result = db.execute("""SELECT Books.title, Books.id FROM Books JOIN Authors
                            ON Books.author_id=Authors.id
@@ -86,6 +88,7 @@ def search():
     if not result:
         return render_template('general.html', message="I found nothing!")
     return render_template('search.html', result=result)
+
 
 @app.route('/books/<id>')
 def books(id):
@@ -100,14 +103,15 @@ def books(id):
                          {"book_id": id}).fetchall()
     reviewed = True if db.execute("""SELECT * FROM Reviews
                                       WHERE user_id=:user_id AND book_id=:book_id""",
-                                   {"user_id": session["user_data"]["id"],
-                                    "book_id": id}).fetchone() else False
+                                  {"user_id": session["user_data"]["id"],
+                                   "book_id": id}).fetchone() else False
     goodreads = get_book_data(result[2])
     return render_template("books.html",
                            r=result,
                            reviews=reviews,
                            reviewed=reviewed,
                            goodreads=goodreads)
+
 
 @app.route('/submit_review', methods=["POST"])
 def submit_review():
@@ -119,6 +123,7 @@ def submit_review():
                 "rating": request.form["rating"]})
     db.commit()
     return redirect(url_for('books', id=request.form["book"]))
+
 
 @app.route('/api/<isbn>')
 def api(isbn):
