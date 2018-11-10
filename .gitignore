@@ -25,3 +25,7 @@ flask_session/
 
 # CS50
 examples/
+
+# Virtual environment
+venv/
+.flaskenv
