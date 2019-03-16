@@ -33,11 +33,21 @@ def login(name):
 
 @socketio.on("add_channel")
 def add_channel(data):
-    if data["channel_name"] not in channels:
-        channels[data["channel_name"]] = []
-        print(data)
+    channel_name = data["channel_name"]
+    if channel_name not in channels:
+        channels[channel_name] = []
+        socketio.emit("new_channel", channel_name)
     else:
         socketio.emit("error", "Channel name taken!")
+
+@socketio.on("fetch_channels")
+def fetch_channels():
+    print("Active channels: {}".format(channels))
+    return list(channels.keys())
+
+@socketio.on("fetch_messages")
+def fetch_messages(channel):
+    return channels[channel]
 
 
 @app.route("/")
