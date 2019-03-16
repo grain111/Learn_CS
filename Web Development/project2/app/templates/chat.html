@@ -1,5 +1,9 @@
 <script src="{{ url_for('static', filename='chat.js') }}"></script>
 <p>Hello {{ session["user_name"] }}</p>
+<form id="add_channel">
+  <input type="text" name="channel_name" id="channel_name">
+  <button type="submit" name="button">Add channel</button>
+</form>
 <div id="chat_container">
   <div id="messages"></div>
   <form id="send_message">
