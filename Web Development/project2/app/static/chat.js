@@ -1,3 +1,5 @@
+let current_channel;
+
 document.addEventListener("DOMContentLoaded", () => {
 
   function add_channel(channel_name) {
@@ -6,11 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector("#channel_list").appendChild(option);
   };
 
+function add_message(data) {
+  if (current_channel == data.channel) {
+    message = document.createElement("li");
+    message.innerHTML = data.message + " by " + data.user + " on " + data.timestamp;
+    document.querySelector("#messages").appendChild(message);
+  };
+};
+
   socket.on("connect", () => {
     socket.emit("fetch_channels", channel_list => {
       console.log("Fetching channels");
       for (let channel of channel_list) {
         add_channel(channel);
+      };
+    });
+
+    socket.emit("fetch_messages", current_channel, messages => {
+      for (let message of messages) {
+        add_message(message);
       };
     });
   });
@@ -22,14 +38,29 @@ document.addEventListener("DOMContentLoaded", () => {
     return false;
   };
 
+  document.querySelector("#send_message").onsubmit = data => {
+    let message = {message: data.srcElement.elements[0].value, channel: current_channel};
+    console.log(message);
+    socket.emit("send_message", {message: data.srcElement.elements[0].value, channel: current_channel});
+    document.querySelector("#message_field").value = "";
+    return false;
+  };
+
   socket.on("new_channel", channel_name => {
     add_channel(channel_name);
   });
 
+  socket.on("new_message", data => {
+    add_message(data);
+  });
+
   document.querySelector("#channel_list").onchange = () => {
-    let channel = document.querySelector("#channel_list").selectedOptions[0].value;
-    socket.emit("fetch_messages", channel, messages => {
-      console.log(messages);
+    current_channel = document.querySelector("#channel_list").selectedOptions[0].value;
+    socket.emit("fetch_messages", current_channel, messages => {
+      document.querySelector("#messages").innerHTML = "";
+      for (let message of messages) {
+        add_message(message);
+      };
     });
 
   };

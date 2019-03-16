@@ -2,10 +2,12 @@ from flask import Flask, render_template, session, request, jsonify, redirect, u
 
 from app import app, socketio
 
-import os
+import os, datetime
 
 users = {}
 channels = {}
+
+max_capacity = 100
 
 
 @socketio.on("connect")
@@ -39,6 +41,20 @@ def add_channel(data):
         socketio.emit("new_channel", channel_name)
     else:
         socketio.emit("error", "Channel name taken!")
+
+@socketio.on("send_message")
+def add_message(data):
+    message = data["message"]
+    channel = data["channel"]
+    user = session["user_name"]
+    if len(channels[channel]) == max_capacity:
+        channels[channel].pop(0)
+    channels[channel].append({"message": message,
+                              "user": user,
+                              "channel": channel,
+                              "timestamp": datetime.datetime.now().strftime('%A, %d. %B %Y %I:%M%p')})
+    socketio.emit("new_message", channels[channel][-1], broadcast=True)
+
 
 @socketio.on("fetch_channels")
 def fetch_channels():
