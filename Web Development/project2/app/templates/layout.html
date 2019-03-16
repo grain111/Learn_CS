@@ -2,14 +2,18 @@
 <html>
   <head>
     <title>{% block title %}{% endblock %}</title>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
     {% block scripts %}{% endblock %}
   </head>
   <body>
     <nav>
       This is navigation
+      <a href="{{ url_for('reset') }}">Reset</a>
+      <p id="error_handle"></p>
     </nav>
+    
+    <main id="main">
       {% block main %}{% endblock %}
-      <main>
     </main>
   </body>
 </html>

@@ -1,0 +1,9 @@
+<script src="{{ url_for('static', filename='chat.js') }}"></script>
+<p>Hello {{ session["user_name"] }}</p>
+<div id="chat_container">
+  <div id="messages"></div>
+  <form id="send_message">
+    <textarea name="send_message" rows="8" cols="80"></textarea>
+    <button type="button" name="button">Send</button>
+  </form>
+</div>
