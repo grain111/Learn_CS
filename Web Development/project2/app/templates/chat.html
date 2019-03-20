@@ -1,18 +1,18 @@
-<script src="{{ url_for('static', filename='chat.js') }}"></script>
+<!-- <script id="chat_app" src="{{ url_for('static', filename='chat.js') }}"></script> -->
 <p>Hello {{ session["user_name"] }}</p>
 
-<select id="channel_list"></select>
+<select id="channel_list" onchange="update_channel()"></select>
 
 </select>
 
-<form id="add_channel">
+<form id="add_channel" onsubmit="return channel_submit(event)">
   <input type="text" name="channel_name" id="channel_name">
   <button type="submit" name="button">Add channel</button>
 </form>
 
 <div id="chat_container">
   <ul id="messages"></ul>
-  <form id="send_message">
+  <form id="send_message" onsubmit="return message_submit(event)">
     <textarea name="send_message" id="message_field" rows="8" cols="80"></textarea>
     <button type="submit" name="button">Send</button>
   </form>

@@ -6,4 +6,4 @@ class Config:
     # Configure session to use filesystem
     SESSION_PERMANENT = True
     SESSION_TYPE = "filesystem"
-    # PERMANENT_SESSION_LIFETIME = 10 * 60
+    PERMANENT_SESSION_LIFETIME = 5 * 60

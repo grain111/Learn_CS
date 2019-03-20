@@ -33,6 +33,7 @@ def login(name):
     else:
         socketio.emit("error", "User name taken!")
 
+
 @socketio.on("add_channel")
 def add_channel(data):
     channel_name = data["channel_name"]
@@ -42,6 +43,7 @@ def add_channel(data):
     else:
         socketio.emit("error", "Channel name taken!")
 
+
 @socketio.on("send_message")
 def add_message(data):
     message = data["message"]
@@ -49,10 +51,14 @@ def add_message(data):
     user = session["user_name"]
     if len(channels[channel]) == max_capacity:
         channels[channel].pop(0)
-    channels[channel].append({"message": message,
-                              "user": user,
-                              "channel": channel,
-                              "timestamp": datetime.datetime.now().strftime('%A, %d. %B %Y %I:%M%p')})
+    channels[channel].append(
+        {
+            "message": message,
+            "user": user,
+            "channel": channel,
+            "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"),
+        }
+    )
     socketio.emit("new_message", channels[channel][-1], broadcast=True)
 
 
@@ -60,6 +66,7 @@ def add_message(data):
 def fetch_channels():
     print("Active channels: {}".format(channels))
     return list(channels.keys())
+
 
 @socketio.on("fetch_messages")
 def fetch_messages(channel):
