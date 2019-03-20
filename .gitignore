@@ -13,12 +13,20 @@ __pycache__/
 *.data
 *.json
 *.csv
+*.temp
 
 # Secret
 secret.json
 
-#SASS
+# SASS
 *.css.map
 
 # Flask
 flask_session/
+
+# CS50
+examples/
+
+# Virtual environment
+venv/
+.flaskenv
