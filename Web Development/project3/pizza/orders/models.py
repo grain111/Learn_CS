@@ -38,13 +38,13 @@ class MenuItem(models.Model):
         Group, on_delete=models.CASCADE, related_name="menu_items"
     )
     p_small = models.FloatField()
-    p_large = models.FloatField()
+    p_large = models.FloatField(blank=True, null=True)
     num_extra = models.IntegerField()
     extras = models.ManyToManyField(ExtraIngridient, through="MenuCombination", related_name="dishes")
     # extras = models.ManyToManyField(ExtraIngridient)
 
     def __str__(self):
-        return "{} {}".format(self.name, self.group)
+        return "{} {}".format(self.group, self.name)
 
 
 class MenuCombination(models.Model):
