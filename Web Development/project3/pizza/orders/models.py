@@ -40,7 +40,9 @@ class MenuItem(models.Model):
     p_small = models.FloatField()
     p_large = models.FloatField(blank=True, null=True)
     num_extra = models.IntegerField()
-    extras = models.ManyToManyField(ExtraIngridient, through="MenuCombination", related_name="dishes")
+    extras = models.ManyToManyField(
+        ExtraIngridient, through="MenuCombination", related_name="dishes"
+    )
     # extras = models.ManyToManyField(ExtraIngridient)
 
     def __str__(self):

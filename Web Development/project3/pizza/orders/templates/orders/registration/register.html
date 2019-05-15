@@ -1,0 +1,26 @@
+{% extends "orders/base.html" %}
+
+{% block body %}
+  <form class="form_register form" action="register" method="post">
+
+     {% csrf_token %}
+
+    <label for="first_name">First name: </label>
+    <input type="text" name="first_name">
+
+    <label for="last_name">Last name: </label>
+    <input type="text" name="last_name">
+
+    <label for="email">E-mail: </label>
+    <input type="email" name="email">
+
+    <label for="user_name">User name: </label>
+    <input type="text" name="user_name">
+
+    <label for="password">Password: </label>
+    <input type="password" name="password">
+
+    <input type="submit" name="submit" value="Submit!">
+
+  </form>
+{% endblock %}

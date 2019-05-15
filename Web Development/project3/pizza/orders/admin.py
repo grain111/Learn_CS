@@ -6,11 +6,14 @@ class MenuCombinationInline(admin.TabularInline):
     model = MenuCombination
     extra = 1
 
+
 class MenuItemAdmin(admin.ModelAdmin):
-    inlines = (MenuCombinationInline, )
+    inlines = (MenuCombinationInline,)
+
 
 class ExtraIngridientAdmin(admin.ModelAdmin):
-    inlines = (MenuCombinationInline, )
+    inlines = (MenuCombinationInline,)
+
 
 admin.site.register(Group)
 admin.site.register(ExtraIngridient, ExtraIngridientAdmin)

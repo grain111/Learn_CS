@@ -1,0 +1,9 @@
+{% extends "orders/base.html" %}
+
+{% block body %}
+  {% if user.is_authenticated %}
+    <p>Hello {{ user.first_name }}</p>
+  {% else %}
+    <p>You need to login!</p>
+  {% endif %}
+{% endblock %}

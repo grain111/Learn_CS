@@ -1,0 +1,16 @@
+{% extends "orders/base.html" %}
+
+{% block body %}
+  <form class="login_form form" action="login" method="post">
+
+    {% csrf_token %}
+
+    <label for="user_name">Username: </label>
+    <input type="text" name="user_name">
+
+    <label for="password">Password: </label>
+    <input type="password" name="password">
+
+    <input type="submit" name="submit" value="Login">
+  </form>
+{% endblock %}
