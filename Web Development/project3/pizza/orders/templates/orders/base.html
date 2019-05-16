@@ -7,14 +7,15 @@
     <meta charset="utf-8">
     <title>A pizza place!</title>
 
-    <link rel="stylesheet" href={% static "orders/main.css" %}>
+    <link rel="stylesheet" href={% static "orders/css/main.css" %}>
   </head>
   <body>
     <nav>
       <ul>
         <li><a href="/">Home</a></li>
-        {% if not user.is_authenticated %}<li>
-        <a href="/register">Register</a></li>
+        <li><a href="/menu">Menu</a></li>
+        {% if not user.is_authenticated %}
+        <li><a href="/register">Register</a></li>
         <li><a href="/login">Login</a></li>
         {% endif %}
         <li><a href="/logout">Logout</a></li>

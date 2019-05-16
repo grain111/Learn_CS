@@ -1,0 +1,40 @@
+{% extends "orders/base.html" %}
+{% load orders_filters %}
+
+{% block body %}
+<h1>Menu</h1>
+{% for group in groups %}
+<div class="menu_group">
+  <h2 class="menu_group__title">{{ group.type }}</h2>
+  {% for k, v in items.items %}
+  {% ifequal k group.type %}
+  {% for item in v %}
+  <div class="menu_item">
+    <div class="menu_item__title">{{ item.name }}</div>
+
+    <div class="menu_item__price">
+      {% if item.p_large %}
+      <p>Price for small: ${{ item.p_small }}</p>
+      <p>Price for large: ${{ item.p_large }}</p>
+      {% else %}
+      <p>Price: ${{ item.p_small }}</p>
+      {% endif %}
+    </div>
+
+    {% for i in item.num_extra|span %}
+    <select class="menu_item__extra_choice" name="choice">
+      <option value="None">{{ None }}</option>
+      {% for ingridient in item.extras.extra %}
+      <option value="{{ ingridient }}">{{ ingridient }}</option>
+      {% endfor %}
+    </select>
+    {% endfor %}
+
+    <button type="menu_item__button" name="button">Add to cart</button>
+  </div>
+  {% endfor %}
+  {% endifequal %}
+  {% endfor %}
+</div>
+{% endfor %}
+{% endblock %}
