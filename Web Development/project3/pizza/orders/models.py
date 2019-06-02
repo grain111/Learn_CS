@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Group(models.Model):
@@ -25,7 +26,7 @@ class ExtraIngridient(models.Model):
 
 class MenuItem(models.Model):
     """
-    Groupq
+    Group
     Name
     AvailbleExtra (Many to Many) with price
     Price for small
@@ -43,7 +44,6 @@ class MenuItem(models.Model):
     extras = models.ManyToManyField(
         ExtraIngridient, through="MenuCombination", related_name="dishes"
     )
-    # extras = models.ManyToManyField(ExtraIngridient)
 
     def __str__(self):
         return "{} {}".format(self.group, self.name)
@@ -53,3 +53,34 @@ class MenuCombination(models.Model):
     extra = models.ForeignKey(ExtraIngridient, on_delete=models.CASCADE)
     item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
     price = models.FloatField()
+
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="orders")
+    confirmation = models.BooleanField()
+    items = models.ManyToManyField(
+        MenuItem, through="MenuItemChoice", related_name="choices"
+    )
+    timestamp = models.DateField(auto_now_add=True)
+
+    def total(self):
+        total = 0
+        for item in self.items.through.objects.filter(order=self):
+            total += item.get_price()
+        return total
+
+    def __str__(self):
+        return "An order by {} made at {}".format(self.user, self.timestamp)
+
+
+class MenuItemChoice(models.Model):
+    item = models.ForeignKey(MenuItem, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    extras = models.ManyToManyField(ExtraIngridient)
+    size = models.CharField(max_length=5)
+
+    def get_price(self):
+        value = self.item.p_small if self.size == "small" else self.item.p_large
+        for extra in self.extras.all():
+            value += MenuCombination.objects.get(extra=extra, item=self.item).price
+        return value

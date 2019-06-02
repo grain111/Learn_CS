@@ -1,15 +1,6 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
-from .models import Group, ExtraIngridient, MenuItem
-
-
-@login_required
-def index(request):
-    return render(request, "orders/index.html")
 
 
 def register(request):
@@ -54,16 +45,3 @@ def login_view(request):
         else:
             context["msg"] = "Username or password incorrect."
     return render(request, "orders/registration/login.html", context)
-
-
-@login_required
-def menu(request):
-    context = {
-        "groups": Group.objects.all(),
-        "items": {
-            group.type: MenuItem.objects.filter(group=group)
-            for group in Group.objects.all()
-        },
-    }
-    print(context["items"])
-    return render(request, "orders/menu.html", context)

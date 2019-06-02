@@ -1,0 +1,31 @@
+{% extends "orders/base.html" %}
+{% load static %}
+{% load orders_filters %}
+
+{% block scripts %}
+<script src={% static "orders/js/order.js" %}></script>
+<script src={% static "orders/js/cart.js" %}></script>
+{% endblock %}
+
+{% block body %}
+<h1>Place your order</h1>
+<form class="order_form" id=order_form method="post">
+
+  {% csrf_token %}
+
+  <label for="name">Name: </label>
+  <input type="text" name="name" value="{{ request.session|get_current_user_name }}">
+
+  <label for="address">Address: </label>
+  <input type="text" name="address">
+
+  <label for="telephone">Address: </label>
+  <input type="number" name="telephone">
+
+  <h2>Selected items</h2>
+  <div class="order_form__items" id="cart"></div>
+
+  <button type="submit" name="submit_btn">Submit</button>
+</form>
+
+{% endblock %}
