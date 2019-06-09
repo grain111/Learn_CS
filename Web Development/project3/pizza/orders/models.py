@@ -62,6 +62,8 @@ class Order(models.Model):
         MenuItem, through="MenuItemChoice", related_name="choices"
     )
     timestamp = models.DateField(auto_now_add=True)
+    address = models.CharField(max_length=64)
+    phone = models.IntegerField()
 
     def total(self):
         total = 0

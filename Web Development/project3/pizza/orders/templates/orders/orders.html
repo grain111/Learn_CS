@@ -1,0 +1,10 @@
+{% extends "orders/base.html" %}
+
+{% block body %}
+  <h1>Your orders:</h1>
+  <div class="orders">
+    {% for order in orders %}
+    {% include "orders/partials/_order.html" with order=order %}
+    {% endfor %}
+  </div>
+{% endblock %}

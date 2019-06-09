@@ -1,0 +1,30 @@
+<div class="order">
+  <p>Order id: {{ order.id }}</p>
+
+  <p>Placed on: {{ order.timestamp }}</p>
+
+  <p>Ordered items:
+    <ul>
+    {% for item in order.items.all %}
+      <li>{{ item }}</li>
+    {% endfor %}
+    </ul>
+  </p>
+
+  <p>Total: ${{ order.total }}</p>
+
+  <p>Address: {{ order.address }}</p>
+
+  <p>Telephone: {{ order.phone }}</p>
+
+  <p>Order status:
+  {% if order.confirmation == True %}
+  Confirmed
+  {% else %}
+  Not Confirmed <a href="../confirm/{{ order.id }}">Confirm!</a>
+  {% endif %}
+  <p>
+
+  <br>
+
+</div>

@@ -9,5 +9,7 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("menu", views.menu, name="menu"),
     path("order", views.order, name="order"),
-    path("confirmation", views.confirmation, name="confirmation"),
+    path("confirmation/<int:id>", views.confirmation, name="confirmation"),
+    path("orders", views.orders, name="orders"),
+    path("confirm/<int:id>", views.confirm, name="confirm"),
 ]

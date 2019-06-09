@@ -1,0 +1,15 @@
+{% extends "orders/base.html" %}
+
+{% block body %}
+{% if order.confirmation == False %}
+<h1>Confirm your order!</h1>
+{% else %}
+<h1>Your order!</h1>
+{% endif %}
+
+<div class="order">
+  <p>An order</p>
+  {% include "orders/partials/_order.html" with order=order %}
+</div>
+
+{% endblock %}
