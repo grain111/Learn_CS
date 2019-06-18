@@ -8,47 +8,53 @@
 
 {% block body %}
 
-<div class="cart">
-  <h2>Cart</h2>
-  <div class="cart__items" id="cart"></div>
-  <a href="order" class=cart__button>Place Order!</a>
-</div>
+<main class="menu_page">
+  <div class="cart">
+    <h2>Cart</h2>
+    <div class="cart__items" id="cart"></div>
+    <a href="order" class=cart__button>Place Order!</a>
+  </div>
 
-<div class="menu">
-  <h1>Menu</h1>
-  {% for group in groups %}
-  <div class="menu_group">
-    <h2 class="menu_group__title">{{ group.type }}</h2>
-    {% for item in group.type|get_items_by_group %}
-    <div class="menu_item">
-      <div class="menu_item__title">{{ item.name }}</div>
+  <div class="menu">
+    <h1>Menu</h1>
+    {% for group in groups %}
+    <div class="menu_group">
+      <h2 class="menu_group__title">{{ group.type }}</h2>
+      {% for item in group.type|get_items_by_group %}
+      <div class="menu_item">
+        <div class="menu_item__title">{{ item.name }}</div>
 
-      <div class="menu_item__price">
-        {% if item.p_large %}
-        <select class="menu_item__size_choice">
-          <option value="{{ "small" }}" data-price="{{ item.p_small }}">Small: ${{ item.p_small }}</option>
-          <option value="{{ "large" }}" data-price="{{ item.p_large }}">Large: ${{ item.p_large }}</option>
-        </select>
-        {% else %}
-        <p data-price="{{ item.p_small }}">Price: ${{ item.p_small }}</p>
-        {% endif %}
-      </div>
+        <div class="menu_item__price">
+          {% if item.p_large %}
+          <p>Choose a size: </p>
+          <select class="menu_item__size_choice">
+            <option value="{{ "small" }}" data-price="{{ item.p_small }}">Small: ${{ item.p_small }}</option>
+            <option value="{{ "large" }}" data-price="{{ item.p_large }}">Large: ${{ item.p_large }}</option>
+          </select>
+          {% else %}
+          <p data-price="{{ item.p_small }}">Price: ${{ item.p_small }}</p>
+          {% endif %}
+        </div>
 
-      <div class="menu_item__extra_choices">
-        {% for i in item.num_extra|span %}
-        <select class="menu_item__extra_choice" name="choice">
-          <option value="None" selected>{{ None }}</option>
-          {% for ingridient in item.extras.extra %}
-          <option value="{{ ingridient }}" data-price="{{ item|get_menu_combination_price:ingridient }}">{{ ingridient }} + {{ item|get_menu_combination_price:ingridient }}</option>
+        <div class="menu_item__extra_choices">
+          {% if item.num_extra > 0 %}
+          <p>Choose extra ingridients: </p>
+          {% endif %}
+          {% for i in item.num_extra|span %}
+          <select class="menu_item__extra_choice" name="choice">
+            <option value="None" selected>{{ None }}</option>
+            {% for ingridient in item.extras.extra %}
+            <option value="{{ ingridient }}" data-price="{{ item|get_menu_combination_price:ingridient }}">{{ ingridient }} + {{ item|get_menu_combination_price:ingridient }}</option>
+            {% endfor %}
+          </select>
           {% endfor %}
-        </select>
-        {% endfor %}
-      </div>
+        </div>
 
-      <button class="menu_item__button" name="button">Add to cart</button>
+        <button class="menu_item__button" name="button">Add to cart</button>
+      </div>
+      {% endfor %}
     </div>
     {% endfor %}
   </div>
-  {% endfor %}
-</div>
+</main>
 {% endblock %}

@@ -1,11 +1,175 @@
-.form {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: kobenhavn-c, sans-serif;
+  background: #c9dcb3;
+  color: #555358;
+}
+
+nav {
+  background: #555358;
+}
+nav ul {
   display: flex;
-  flex-direction: column;
-  width: 50%;
+  justify-content: space-around;
+  margin: 0;
+  padding: 0 5rem;
+}
+nav li {
+  list-style: none;
+}
+nav a {
+  display: block;
+  text-decoration: none;
+  color: #c6ca53;
+  font-size: 1.25rem;
+  padding: 1rem 2rem;
+}
+nav li:hover {
+  background: #222124;
 }
 
 .error_msg {
-  width: 100%;
-  color: white;
+  width: 50%;
+  color: rgba(255, 255, 255, 0.85);
   background: red;
+  font-size: 1.25rem;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
+
+.cart {
+  display: block;
+  background: #b0cc90;
+  padding: 2rem 0.5rem;
+}
+.cart__button {
+  display: block;
+  color: inherit;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  background: #c6ca53;
+}
+.cart h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.cart__items ul {
+  padding: 0;
+  list-style: none;
+  text-transform: capitalize;
+}
+.cart__items ul li {
+  margin-bottom: 0.5rem;
+}
+
+.form_register,
+.form_login {
+  display: flex;
+  flex-direction: column;
+  max-width: 75%;
+  margin: 0 auto;
+}
+.form_register ul,
+.form_login ul {
+  list-style: none;
+}
+.form_register li,
+.form_login li {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.form_register label,
+.form_login label {
+  width: 20rem;
+  margin-right: 5rem;
+}
+.form_register input,
+.form_login input {
+  height: 2rem;
+  width: 100%;
+}
+.form_register input[type=submit],
+.form_login input[type=submit] {
+  font-size: 2rem;
+  height: 100%;
+  padding: 0.5rem 0;
+  width: 10rem;
+  margin-left: auto;
+  border: none;
+  background: #c6ca53;
+}
+
+.menu_page {
+  display: inline-block;
+  width: 100%;
+}
+
+.menu {
+  width: 69%;
+  float: left;
+}
+.menu select {
+  display: block;
+  padding: 0.5em 1.3em 0.4em 0.5em;
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
+  border-radius: 0.2rem;
+}
+.menu h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.menu_group {
+  margin-bottom: 3rem;
+}
+.menu_group__title {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.menu_item {
+  margin-bottom: 1.5rem;
+}
+.menu_item__title {
+  font-size: 1.2rem;
+  margin-bottom: 0.25rem;
+}
+.menu_item__price {
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.menu_item__price p {
+  margin-right: 1rem;
+}
+.menu_item__extra_choices {
+  margin-bottom: 0.5rem;
+}
+.menu_item__button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #c6ca53;
+}
+
+.cart {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 5rem;
+  width: 29%;
+  float: right;
+}
+
+/*# sourceMappingURL=main.css.map */

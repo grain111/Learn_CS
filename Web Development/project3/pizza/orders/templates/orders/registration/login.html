@@ -1,16 +1,20 @@
 {% extends "orders/base.html" %}
 
 {% block body %}
-  <form class="login_form form" action="login" method="post">
+  <form class="form_login form" action="login" method="post">
 
     {% csrf_token %}
+    <ul>
+      <li>
+        <label for="user_name">Username: </label>
+        <input type="text" name="user_name">
+      </li>
 
-    <label for="user_name">Username: </label>
-    <input type="text" name="user_name">
-
-    <label for="password">Password: </label>
-    <input type="password" name="password">
-
+      <li>
+        <label for="password">Password: </label>
+        <input type="password" name="password">
+      </li>
+    </ul>
     <input type="submit" name="submit" value="Login">
   </form>
 {% endblock %}
