@@ -1,0 +1,7 @@
+language: python
+python:
+        - "3.6"
+install:
+        - pip install django
+script: 
+        - python ".\Web Development\project3\pizza\manage.py" test
