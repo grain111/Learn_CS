@@ -4,4 +4,4 @@ python:
 install:
         - pip install django
 script: 
-        - "./Web Development/project3/pizza/manage.py" test
+        - python "./Web Development/project3/pizza/manage.py" test
