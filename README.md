@@ -23,7 +23,7 @@ You can find the video [here](https://youtu.be/-OvRVlqKebI).
 ## <del>Week 8 (Networking)</del>
 -  https://www.coursera.org/learn/computer-networking
 
-## Week 9-10 (Web Development)
+## <del>Week 9-10 (Web Development)</del>
 - https://www.youtube.com/watch?v=1u2qu-EmIRc&list=PLhQjrBD2T382hIW-IsOVuXP1uMzEvmcE5
 - https://github.com/melanierichards/just-build-websites
 
