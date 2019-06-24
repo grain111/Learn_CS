@@ -5,4 +5,5 @@ install:
         - pip install django
 script: 
         - ls
+        - ls
         - ".\Web Development\project3\pizza\manage.py" test
